@@ -1,7 +1,9 @@
 @echo off
 
 :variables (
-    set psscript=%~dp0\runscript.ps1
+rem locations of script files (%~dp0 means same directory as this file)
+rem it is recommended that you use absolute paths.
+    set psscript=%~dp0\run.ps1
     set cscript=%~dp0\script.cs
 )
 
@@ -27,6 +29,11 @@ rem write powershell script for executing c# files
 
 rem run powershell script
     powershell -noprofile -executionpolicy bypass -file %psscript%
+
+rem remove script after done
+    if exist %psscript% (
+        del %psscript%
+    )
     goto :eof
 )
 
